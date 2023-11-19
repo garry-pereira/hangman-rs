@@ -1,5 +1,6 @@
 use std::io;
 
+#[allow(dead_code)]
 pub struct Game {
     word: String,
     letters_left_to_guess: u8,
