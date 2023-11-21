@@ -4,7 +4,7 @@ fn main() {
 
     // get player guess
     let mut guess: String = String::new();
-    let guess_to_handle = Game::guess(&mut guess);
+    let guess_to_handle = Game::accept_guess(&mut guess);
 
     // compare the guess to the word
     game.check(guess_to_handle);

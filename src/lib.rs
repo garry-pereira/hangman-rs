@@ -17,30 +17,39 @@ impl Game {
         }
     }
 
-    pub fn guess(guess: &mut String) -> &str {
-        let guess_output: &str = match io::stdin().read_line(guess) {
-            Ok(_) => {
-                let output: &str = guess.trim();
-                output
+    pub fn accept_guess(guess: &mut String) -> &str {
+        loop {
+            guess.truncate(0);
+            io::stdin()
+                .read_line(guess)
+                .expect("failed to accept input");
+
+            print!("your guess was: {}", guess);
+
+            if guess.trim().len() == 1 {
+                break guess.trim();
+            } else {
+                println!("guess 1 letter at a time");
             }
-            Err(error) => panic!("{} was the error", error),
-        };
-        guess_output
+        }
     }
 
     pub fn check(&self, guess: &str) {
         if self.word.contains(guess) {
-            println!("word: {} contains guess: {}", self.word, guess);
+            println!("your guess: '{}' success", guess);
         } else {
-            println!("word: {} does NOT contain guess: {} ", self.word, guess);
+            println!("your guess: '{}' fail", guess);
         }
     }
 }
 
 #[cfg(test)]
 mod test {
+    use super::*;
+
     #[test]
-    fn test() {
-        println!("hello");
+    fn accepts_guess() {
+        let mut test: String = String::new();
+        assert_ne!(0, Game::accept_guess(&mut test).len())
     }
 }
