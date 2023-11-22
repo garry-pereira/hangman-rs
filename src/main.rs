@@ -1,11 +1,10 @@
 use hangman::Game;
 fn main() {
-    let game: Game = Game::new(String::from("potato"));
+    let mut game: Game = Game::new(String::from("potato"));
 
-    // get player guess
-    let mut guess: String = String::new();
-    let guess_to_handle = Game::accept_guess(&mut guess);
+    // game.intro();
 
-    // compare the guess to the word
-    game.check(guess_to_handle);
+    game.accept_guess();
+
+    game.check();
 }
